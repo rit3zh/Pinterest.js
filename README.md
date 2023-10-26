@@ -31,8 +31,8 @@ We welcome contributions from the community. If you find any issues or have idea
 
 ## License 📜
 
-Pinterest.js is licensed under the [MIT License](link-to-license-file), making it open and accessible for developers to use and modify in their projects.
+Pinterest.js is licensed under the [MIT License](https://github.com/TrishCX/Pinterest.js/blob/main/LICENSE), making it open and accessible for developers to use and modify in their projects.
 
 ---
 
-_Note: Replace 'yourusername' and 'link-to-license-file' with your GitHub username and the link to the license file, respectively, when setting up your repository._
+_Note: Replace 'Ritesh CX' and [LICENSE](https://github.com/TrishCX/Pinterest.js/blob/main/LICENSE) with your GitHub username and the link to the license file, respectively, when setting up your repository._
