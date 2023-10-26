@@ -27,7 +27,7 @@ const Pinterest = require("pinterest.js");
 
 ## Contribution 🤝
 
-We welcome contributions from the community. If you find any issues or have ideas for enhancements, feel free to open an issue or create a pull request on our [GitHub repository](https://github.com/yourusername/pinterest.js).
+We welcome contributions from the community. If you find any issues or have ideas for enhancements, feel free to open an issue or create a pull request on our [GitHub repository](https://github.com/TrishCX/Pinterest.js).
 
 ## License 📜
 

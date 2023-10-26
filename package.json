@@ -4,7 +4,7 @@
   "description": "Get data from pinterest without any hassle.",
   "main": "dist/index.js",
   "repository": {
-    "url": ""
+    "url": "https://github.com/TrishCX/Pinterest.js"
   },
   "scripts": {
     "dev": "nodemon dist/index.js",
@@ -17,7 +17,7 @@
     "api"
   ],
   "author": "IMax",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "nodemon": "^3.0.1",
     "tsx": "^3.14.0",
