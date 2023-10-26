@@ -3,6 +3,7 @@ import request from "../fetch/request";
 import parseSuggestions from "../parser/parser.suggestions";
 
 export async function suggestions(id: string, bookmark?: string) {
+  if (!id) throw Error("No id specified");
   const params = {
     source_url: `/pin/${id}/`,
     data: {

@@ -12,34 +12,39 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.suggestions = void 0;
+exports.searchBoards = void 0;
 const api_1 = require("../api/api");
 const request_1 = __importDefault(require("../fetch/request"));
-const parser_suggestions_1 = __importDefault(require("../parser/parser.suggestions"));
-function suggestions(id, bookmark) {
+const parser_boards_1 = __importDefault(require("../parser/parser.boards"));
+function searchBoards(query, bookmark) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (!id)
-            throw Error("No id specified");
+        if (!query)
+            throw Error("No query specified");
         const params = {
-            source_url: `/pin/${id}/`,
+            source_url: `/search/boards/?q=${query}&rs=content_type_filter`,
             data: {
                 options: {
-                    pin_id: `${id}`,
-                    context_pin_ids: [],
-                    page_size: 12,
-                    search_query: "",
-                    source: "deep_linking",
-                    top_level_source: "deep_linking",
-                    top_level_source_depth: 1,
-                    is_pdp: false,
+                    article: null,
+                    applied_filters: null,
+                    appliedProductFilters: "---",
+                    auto_correction_disabled: false,
+                    corpus: null,
+                    customized_rerank_type: null,
+                    filters: null,
+                    query: query,
+                    query_pin_sigs: null,
+                    redux_normalize_feed: true,
+                    rs: "content_type_filter",
+                    scope: "boards",
+                    source_id: null,
                     bookmarks: [bookmark],
                 },
                 context: {},
             },
         };
-        const URL = `${api_1.Api.baseURL}/resource/RelatedModulesResource/get/?source_url=${encodeURIComponent(params.source_url)}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
+        const URL = `${api_1.Api.baseURL}/resource/BaseSearchResource/get/?source_url=${encodeURIComponent(params.source_url)}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
         const data = yield request_1.default.get(URL);
-        return (0, parser_suggestions_1.default)(data);
+        return (0, parser_boards_1.default)(data);
     });
 }
-exports.suggestions = suggestions;
+exports.searchBoards = searchBoards;

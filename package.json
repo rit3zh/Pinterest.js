@@ -1,14 +1,22 @@
 {
   "name": "pinterest.js",
   "version": "1.0.0",
-  "description": "Get pinterest data.",
-  "main": "index.js",
+  "description": "Get data from pinterest without any hassle.",
+  "main": "dist/index.js",
+  "repository": {
+    "url": ""
+  },
   "scripts": {
     "dev": "nodemon dist/index.js",
     "watch": "tsc --watch"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "pinterest",
+    "image",
+    "google",
+    "api"
+  ],
+  "author": "IMax",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.0.1",

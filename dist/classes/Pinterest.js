@@ -19,6 +19,14 @@ class Pinterest {
             return data;
         });
     }
+    static board(query, bookmark) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!query)
+                throw Error("No query specified");
+            const data = yield (0, functions_1.searchBoards)(query, bookmark);
+            return data;
+        });
+    }
     static suggestions(id, bookmark) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!id)
@@ -40,6 +48,14 @@ class Pinterest {
             if (!query)
                 throw Error("No query specified");
             const data = yield (0, functions_1.searchPins)(query, bookmark);
+            return data;
+        });
+    }
+    board(query, bookmark) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!query)
+                throw Error("No query specified");
+            const data = yield (0, functions_1.searchBoards)(query, bookmark);
             return data;
         });
     }

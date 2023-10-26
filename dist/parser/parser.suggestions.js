@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const externals_1 = require("../externals");
 function parseSuggestions(data) {
     const root = data === null || data === void 0 ? void 0 : data.resource_response;
     const bookmark = root === null || root === void 0 ? void 0 : root.bookmark;
@@ -16,7 +17,7 @@ function parseSuggestions(data) {
         const type = response === null || response === void 0 ? void 0 : response.type;
         const pinner = response === null || response === void 0 ? void 0 : response.pinner;
         const initialDate = new Date(date);
-        const formattedDate = formatDate(initialDate, "yyyy-MM-dd");
+        const formattedDate = (0, externals_1.formatDate)(initialDate, "yyyy-MM-dd");
         array.push({
             id,
             title,
@@ -41,14 +42,3 @@ function parseSuggestions(data) {
     };
 }
 exports.default = parseSuggestions;
-function formatDate(date, format) {
-    const pad = (n) => (n < 10 ? "0" + n : n.toString());
-    const formattedDate = format
-        .replace(/yyyy/g, date.getFullYear().toString())
-        .replace(/MM/g, pad(date.getMonth() + 1))
-        .replace(/dd/g, pad(date.getDate()))
-        .replace(/HH/g, pad(date.getHours()))
-        .replace(/mm/g, pad(date.getMinutes()))
-        .replace(/ss/g, pad(date.getSeconds()));
-    return formattedDate;
-}

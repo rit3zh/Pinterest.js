@@ -1,0 +1,1 @@
+{"version":3,"file":"Board.Results.d.ts","sourceRoot":"","sources":["../../src/interfaces/Board.Results.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,iBAAiB,CAAC;AAE1C,MAAM,WAAW,aAAa;IAC5B,QAAQ,CAAC,EAAE,MAAM,CAAC;IAClB,QAAQ,CAAC,EAAE,OAAO,EAAE,CAAC;CACtB"}

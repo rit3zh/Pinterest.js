@@ -12,34 +12,38 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.suggestions = void 0;
-const api_1 = require("../api/api");
+exports.getBoard = void 0;
+const parser_getBoard_1 = __importDefault(require("../parser/parser.getBoard"));
 const request_1 = __importDefault(require("../fetch/request"));
-const parser_suggestions_1 = __importDefault(require("../parser/parser.suggestions"));
-function suggestions(id, bookmark) {
+const api_1 = require("../api/api");
+function getBoard(options) {
     return __awaiter(this, void 0, void 0, function* () {
+        const { id, slashurl, bookmark } = options;
         if (!id)
-            throw Error("No id specified");
+            throw Error("No id specified.");
+        if (!slashurl)
+            throw Error("No slash url specified.");
         const params = {
-            source_url: `/pin/${id}/`,
+            source_url: `${slashurl}`,
             data: {
                 options: {
-                    pin_id: `${id}`,
-                    context_pin_ids: [],
-                    page_size: 12,
-                    search_query: "",
-                    source: "deep_linking",
-                    top_level_source: "deep_linking",
-                    top_level_source_depth: 1,
-                    is_pdp: false,
+                    board_id: id,
+                    board_url: slashurl,
+                    currentFilter: -1,
+                    field_set_key: "react_grid_pin",
+                    filter_section_pins: true,
+                    sort: "default",
+                    layout: "default",
+                    page_size: 25,
+                    redux_normalize_feed: true,
                     bookmarks: [bookmark],
                 },
                 context: {},
             },
         };
-        const URL = `${api_1.Api.baseURL}/resource/RelatedModulesResource/get/?source_url=${encodeURIComponent(params.source_url)}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
+        const URL = `${api_1.Api.baseURL}/resource/BoardFeedResource/get/?source_url=${encodeURIComponent(params.source_url)}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
         const data = yield request_1.default.get(URL);
-        return (0, parser_suggestions_1.default)(data);
+        return (0, parser_getBoard_1.default)(data);
     });
 }
-exports.suggestions = suggestions;
+exports.getBoard = getBoard;

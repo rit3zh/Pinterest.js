@@ -3,6 +3,7 @@ import request from "../fetch/request";
 import searchParser from "../parser/parser.search";
 
 export async function searchPins(query: string, bookMark?: string | undefined) {
+  if (!query) throw Error("No query specified");
   const params = {
     source_url: `/search/pins/?q=${query}&rs=typed`,
     data: {

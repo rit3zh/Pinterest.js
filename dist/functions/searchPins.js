@@ -18,6 +18,8 @@ const request_1 = __importDefault(require("../fetch/request"));
 const parser_search_1 = __importDefault(require("../parser/parser.search"));
 function searchPins(query, bookMark) {
     return __awaiter(this, void 0, void 0, function* () {
+        if (!query)
+            throw Error("No query specified");
         const params = {
             source_url: `/search/pins/?q=${query}&rs=typed`,
             data: {
