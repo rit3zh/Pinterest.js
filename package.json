@@ -1,0 +1,18 @@
+{
+  "name": "pinterest.js",
+  "version": "1.0.0",
+  "description": "Get pinterest data.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon dist/index.js",
+    "watch": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "tsx": "^3.14.0",
+    "typescript": "^5.2.2"
+  }
+}
