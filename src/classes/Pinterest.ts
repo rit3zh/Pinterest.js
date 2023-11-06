@@ -1,6 +1,6 @@
 import { searchPins, suggestions, searchBoards } from "../functions";
 
-export default class Pinterest {
+export class Pinterest {
   public static async pins(query: string, bookmark?: string) {
     if (!query) throw Error("No query specified");
     const data = await searchPins(query, bookmark);

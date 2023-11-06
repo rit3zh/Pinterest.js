@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Pinterest = void 0;
 const functions_1 = require("../functions");
 class Pinterest {
     static pins(query, bookmark) {
@@ -60,4 +61,4 @@ class Pinterest {
         });
     }
 }
-exports.default = Pinterest;
+exports.Pinterest = Pinterest;

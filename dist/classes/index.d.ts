@@ -1,2 +1,2 @@
-export { default as Pinterest } from "./Pinterest";
+export * from "./Pinterest";
 //# sourceMappingURL=index.d.ts.map

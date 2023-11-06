@@ -1,4 +1,4 @@
-export default class Pinterest {
+export declare class Pinterest {
     static pins(query: string, bookmark?: string): Promise<import("..").SearchResults>;
     static board(query: string, bookmark?: string): Promise<import("..").BoardResponse>;
     static suggestions(id: string, bookmark?: string): Promise<import("..").SearchResults>;
