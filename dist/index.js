@@ -14,8 +14,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = void 0;
 __exportStar(require("./functions/index"), exports);
 __exportStar(require("./interfaces"), exports);
-var index_1 = require("./classes/index");
-Object.defineProperty(exports, "default", { enumerable: true, get: function () { return index_1.Pinterest; } });
