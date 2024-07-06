@@ -14,7 +14,12 @@
     "pinterest",
     "image",
     "google",
-    "api"
+    "api",
+    "pinterest-api",
+    "google-images",
+    "search-images",
+    "pinterest-image",
+    "videos"
   ],
   "author": "IMax",
   "license": "MIT",
