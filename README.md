@@ -2,6 +2,12 @@
 
 [Pinterest.js]() is a versatile and efficient JavaScript library that allows you to get information from [Pinterest](https://pinterest.com)
 
+## Release Notes 📝
+
+- **Added support for video search functionality.**
+- **Added "limit" option in the "searchPins" function**
+- **Resolved all the errors**
+
 ## Key Features 🚀
 
 - **Extremely fast 💡**
