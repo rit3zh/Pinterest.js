@@ -12,11 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Pinterest = void 0;
 const functions_1 = require("../functions");
 class Pinterest {
-    static pins(query, bookmark) {
+    static pins(query, options) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!query)
                 throw Error("No query specified");
-            const data = yield (0, functions_1.searchPins)(query, bookmark);
+            const data = yield (0, functions_1.searchPins)(query, options);
             return data;
         });
     }
@@ -44,11 +44,11 @@ class Pinterest {
             return data;
         });
     }
-    pins(query, bookmark) {
+    pins(query, options) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!query)
                 throw Error("No query specified");
-            const data = yield (0, functions_1.searchPins)(query, bookmark);
+            const data = yield (0, functions_1.searchPins)(query, options);
             return data;
         });
     }

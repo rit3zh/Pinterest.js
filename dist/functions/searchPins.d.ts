@@ -1,2 +1,7 @@
-export declare function searchPins(query: string, bookMark?: string | undefined): Promise<import("..").SearchResults>;
+import { ISearch, SearchOptions } from "../interfaces/index";
+export interface ISearchResponse {
+    response?: ISearch[];
+    bookmark?: string;
+}
+export declare function searchPins(query: string, options?: SearchOptions): Promise<ISearchResponse>;
 //# sourceMappingURL=searchPins.d.ts.map

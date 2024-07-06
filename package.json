@@ -7,8 +7,8 @@
     "url": "https://github.com/TrishCX/Pinterest.js"
   },
   "scripts": {
-    "dev": "nodemon dist/index.js",
-    "watch": "tsc --watch"
+    "build:dev": "nodemon dist/index.js",
+    "watch": "tsx watch src/index.ts"
   },
   "keywords": [
     "pinterest",
@@ -22,5 +22,8 @@
     "nodemon": "^3.0.1",
     "tsx": "^3.14.0",
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "axios": "^1.7.2"
   }
 }

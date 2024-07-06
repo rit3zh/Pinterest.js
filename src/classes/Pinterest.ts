@@ -1,9 +1,10 @@
 import { searchPins, suggestions, searchBoards } from "../functions";
+import { SearchOptions } from "../interfaces";
 
 export class Pinterest {
-  public static async pins(query: string, bookmark?: string) {
+  public static async pins(query: string, options?: SearchOptions) {
     if (!query) throw Error("No query specified");
-    const data = await searchPins(query, bookmark);
+    const data = await searchPins(query, options);
     return data;
   }
   public static async board(query: string, bookmark?: string) {
@@ -22,9 +23,9 @@ export class Pinterest {
     const data = await suggestions(id, bookmark);
     return data;
   }
-  public async pins(query: string, bookmark?: string) {
+  public async pins(query: string, options?: SearchOptions) {
     if (!query) throw Error("No query specified");
-    const data = await searchPins(query, bookmark);
+    const data = await searchPins(query, options);
     return data;
   }
 

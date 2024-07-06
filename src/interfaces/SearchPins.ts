@@ -17,4 +17,5 @@ export interface ISearch {
   type?: string;
   pinner?: IPinner;
   imageURL?: string;
+  video?: string | undefined;
 }

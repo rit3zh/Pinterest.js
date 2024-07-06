@@ -16,32 +16,59 @@ exports.searchPins = void 0;
 const api_1 = require("../api/api");
 const request_1 = __importDefault(require("../fetch/request"));
 const parser_search_1 = __importDefault(require("../parser/parser.search"));
-function searchPins(query, bookMark) {
+const parse_videosSearch_1 = require("../parser/parse.videosSearch");
+function searchPins(query, options) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!query)
             throw Error("No query specified");
-        const params = {
-            source_url: `/search/pins/?q=${query}&rs=typed`,
-            data: {
-                options: {
-                    article: "",
-                    appliedProductFilters: "---",
-                    price_max: null,
-                    price_min: null,
-                    query: query,
-                    scope: "pins",
-                    auto_correction_disabled: "",
-                    top_pin_id: "",
-                    filters: "",
-                    page_size: "7",
-                    bookmarks: [bookMark],
+        if (typeof (options === null || options === void 0 ? void 0 : options.filter) === "string" && (options === null || options === void 0 ? void 0 : options.filter) === "videos") {
+            const params = {
+                source_url: `/search/pins/?q=${query}&rs=typed`,
+                data: {
+                    options: {
+                        article: "",
+                        appliedProductFilters: "---",
+                        price_max: null,
+                        price_min: null,
+                        query: query,
+                        scope: "videos",
+                        auto_correction_disabled: "",
+                        top_pin_id: "",
+                        filters: "",
+                        page_size: !(options === null || options === void 0 ? void 0 : options.limit) ? 10 : options === null || options === void 0 ? void 0 : options.limit,
+                        bookmarks: [options === null || options === void 0 ? void 0 : options.bookmark],
+                    },
+                    context: {},
                 },
-                context: {},
-            },
-        };
-        const URL = `${api_1.Api.baseURL}/resource/BaseSearchResource/get/?source_url=${encodeURIComponent(params.source_url)}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
-        const data = yield request_1.default.get(URL);
-        return (0, parser_search_1.default)(data);
+            };
+            const URL = `${api_1.Api.baseURL}/resource/BaseSearchResource/get/?source_url=${encodeURIComponent(params.source_url)}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
+            const data = yield request_1.default.get(URL);
+            return (0, parse_videosSearch_1.parseSearchVideos)(data);
+        }
+        else {
+            const params = {
+                source_url: `/search/pins/?q=${query}&rs=typed`,
+                data: {
+                    options: {
+                        article: "",
+                        appliedProductFilters: "---",
+                        price_max: null,
+                        price_min: null,
+                        query: query,
+                        scope: "pins",
+                        auto_correction_disabled: "",
+                        top_pin_id: "",
+                        filters: "",
+                        page_size: !(options === null || options === void 0 ? void 0 : options.limit) ? 10 : options === null || options === void 0 ? void 0 : options.limit,
+                        bookmarks: [options === null || options === void 0 ? void 0 : options.bookmark],
+                    },
+                    context: {},
+                },
+            };
+            const URL = `${api_1.Api.baseURL}/resource/BaseSearchResource/get/?source_url=${encodeURIComponent(params.source_url)}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
+            const data = yield request_1.default.get(URL);
+            return (0, parser_search_1.default)(data);
+        }
     });
 }
 exports.searchPins = searchPins;

@@ -1,6 +1,7 @@
-export * from "./SearchPins";
-export * from "./Search.Results";
-export * from "./Search.Boards";
-export * from "./Board.Results";
-export * from "./Board.Options";
-export * from "./BoardData.Items";
+export type * from "./SearchPins";
+export type * from "./Search.Results";
+export type * from "./Search.Boards";
+export type * from "./Board.Results";
+export type * from "./Board.Options";
+export type * from "./BoardData.Items";
+export type * from "./SearchOptions";
