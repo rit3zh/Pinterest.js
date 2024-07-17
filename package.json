@@ -20,7 +20,12 @@
     "google-images",
     "search-images",
     "pinterest-image",
-    "videos"
+    "videos",
+    "pins",
+    "serp-api",
+    "pinterest-json",
+    "form",
+    "json"
   ],
   "author": "rit3zh",
   "license": "MIT",
