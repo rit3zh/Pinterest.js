@@ -39,7 +39,7 @@ const Pinterest = require("pinterest.js");
 - Added "limit" option in the "searchPins" function.
 - Resolved all existing errors.
 
-### [1.0.7] - 2024-07-10
+### [1.0.8] - 2024-07-10
 
 - Initial release of Pinterest.js with basic functionality to search and retrieve pins.
 
