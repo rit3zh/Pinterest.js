@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build:dev": "nodemon dist/index.js",
-    "watch": "tsx watch src/index.ts"
+    "watch": "tsx watch src/index.ts",
+    "watch:dev": "npx tsc --watch"
   },
   "keywords": [
     "pinterest",
@@ -21,7 +22,7 @@
     "pinterest-image",
     "videos"
   ],
-  "author": "IMax",
+  "author": "rit3zh",
   "license": "MIT",
   "devDependencies": {
     "nodemon": "^3.0.1",
