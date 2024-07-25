@@ -1,6 +1,6 @@
 {
   "name": "pinterest.js",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Get data from pinterest without any hassle.",
   "main": "dist/index.js",
   "repository": {
