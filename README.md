@@ -48,7 +48,7 @@ const Pinterest = require("pinterest.js");
 
 - Initial release of Pinterest.js with basic functionality to search and retrieve pins.
 
-### [1.0.10] - 2024-07-25
+### [1.0.11] - 2024-07-25
 
 - Added `getAutoCompletion` function that takes a query parameter.
 
