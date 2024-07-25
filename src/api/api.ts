@@ -3,7 +3,7 @@ interface IApi {
   endpoints?: any;
 }
 export const Api: IApi = {
-  baseURL: "https://www.pinterest.com",
+  baseURL: "https://pinterest.com",
   endpoints: {
     searchApi: "",
   },

@@ -1,12 +1,17 @@
+Here's the updated README with the new `getAutoCompletion` function added:
+
+---
+
 # Pinterest.js 📌
 
-[Pinterest.js]() is a versatile and efficient JavaScript library that allows you to get information from [Pinterest](https://pinterest.com)
+[Pinterest.js]() is a versatile and efficient JavaScript library that allows you to get information from [Pinterest](https://pinterest.com).
 
 ## Release Notes 📝
 
 - **Added support for video search functionality.**
 - **Added "limit" option in the "searchPins" function**
 - **Resolved all the errors**
+- **Added `getAutoCompletion` function that takes a query parameter**
 
 ## Key Features 🚀
 
@@ -42,6 +47,10 @@ const Pinterest = require("pinterest.js");
 ### [1.0.8] - 2024-07-10
 
 - Initial release of Pinterest.js with basic functionality to search and retrieve pins.
+
+### [1.0.9] - 2024-07-25
+
+- Added `getAutoCompletion` function that takes a query parameter.
 
 ## Projects Using Pinterest.js 🌟
 

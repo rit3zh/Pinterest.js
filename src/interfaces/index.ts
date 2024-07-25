@@ -7,3 +7,4 @@ export type * from "./BoardData.Items";
 export type * from "./SearchOptions";
 export type * from "./Pin.Results";
 export type * from "./Pin.Response";
+export type * from "./Search.AutoCompletion";
