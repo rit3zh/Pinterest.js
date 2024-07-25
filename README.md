@@ -1,7 +1,3 @@
-Here's the updated README with the new `getAutoCompletion` function added:
-
----
-
 # Pinterest.js 📌
 
 [Pinterest.js]() is a versatile and efficient JavaScript library that allows you to get information from [Pinterest](https://pinterest.com).
