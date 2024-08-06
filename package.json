@@ -25,7 +25,9 @@
     "serp-api",
     "pinterest-json",
     "form",
-    "json"
+    "json",
+    "images",
+    "google-serp"
   ],
   "author": "rit3zh",
   "license": "MIT",

@@ -1,7 +1,7 @@
 import type { ISearch, SearchResults } from "../interfaces/index";
 import { formatDate } from "../externals";
 
-export default function parseSuggestions(data: any): SearchResults {
+export default function parseSuggestions(data: any) {
   const root = data?.resource_response;
   const bookmark = root?.bookmark;
   const results = root?.data;
@@ -19,6 +19,11 @@ export default function parseSuggestions(data: any): SearchResults {
     const pinner = response?.pinner;
     const initialDate = new Date(date);
     const formattedDate = formatDate(initialDate, "yyyy-MM-dd");
+    const videos = response?.videos?.video_list;
+    const V_HLSV4 = videos?.V_HLSV4?.url;
+    const clean_url =
+      V_HLSV4?.replace("/hls/", "/hevcMp4V2/")?.replace(".m3u8", "_t5.mp4") ||
+      undefined;
     array.push({
       id,
       title,
@@ -35,6 +40,7 @@ export default function parseSuggestions(data: any): SearchResults {
       },
       type: type,
       imageURL,
+      video: clean_url,
     });
   });
   return {

@@ -48,6 +48,10 @@ const Pinterest = require("pinterest.js");
 
 - Added `getAutoCompletion` function that takes a query parameter.
 
+### [1.0.12] - 2024-07-25
+
+- Fixed the `video` property in the `suggestions` function.
+
 ## Projects Using Pinterest.js 🌟
 
 Here are some amazing projects built using Pinterest.js:
