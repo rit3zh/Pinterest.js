@@ -54,7 +54,7 @@ const Pinterest = require("pinterest.js");
 
 - Fixed the `video` property in the `suggestions` function.
 
-### [1.0.14] - 2024-08-06
+### [1.0.15] - 2024-08-06
 
 - Added `getComments` function that taked a `IOptions` as a parameter.
 - The old function `getPin` has been officially deprecated though, it is still usable `getPinV3`
