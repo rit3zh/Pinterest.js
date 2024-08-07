@@ -1,15 +1,25 @@
-import { Api } from "../api/api";
 import request from "../fetch/request";
-import { parseSpecificScriptTags } from "../parser/parser.tags";
-import { parsePinData } from "../parser/parese.pin";
-import type { ParsedPinData } from "../interfaces";
+import { PinV4Response } from "../interfaces";
+import { parsePinV4 } from "../parser/parse.pin";
 
-export async function getPin(id: string): Promise<ParsedPinData> {
-  const requestCall = await request.getText(Api.baseURL + `/pin/${id}`);
-  const response = requestCall;
-  const parseScriptAllScriptTags = parseSpecificScriptTags(response);
-  const scriptFormValidation = parseScriptAllScriptTags[0];
-  const JSONConversion = JSON.parse(scriptFormValidation);
-  const data = parsePinData(JSONConversion);
-  return { ...data };
+export async function getPin<T extends string>(id: T): Promise<PinV4Response> {
+  const params = {
+    source_url: `/pin/${id}/`,
+    data: {
+      options: {
+        id: `${id}`,
+        field_set_key: "auth_web_main_pin",
+        noCache: true,
+        fetch_visual_search_objects: true,
+      },
+      context: {},
+    },
+  };
+
+  const URL: string = `https://in.pinterest.com/resource/PinResource/get/?source_url=${encodeURIComponent(
+    params.source_url
+  )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
+
+  const data = await request.get(URL);
+  return parsePinV4(data);
 }

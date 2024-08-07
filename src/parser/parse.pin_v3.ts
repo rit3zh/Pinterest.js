@@ -1,6 +1,7 @@
 import { Data, ImageResponse, ParsedPinData } from "../interfaces";
 
 export function parsePinData(data: Data) {
+  console.log(data.response.data.v3GetPinQuery.data);
   const { response } = data;
   const _data = response?.data;
   const v3GetPinQuery = _data?.v3GetPinQuery?.data;

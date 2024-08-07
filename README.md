@@ -8,6 +8,8 @@
 - **Added "limit" option in the "searchPins" function**
 - **Resolved all the errors**
 - **Added `getAutoCompletion` function that takes a query parameter**
+- **Addedd `getComments` function that takes `IOptions` as a parameter**
+- **Fixed video property**
 
 ## Key Features 🚀
 
@@ -52,6 +54,11 @@ const Pinterest = require("pinterest.js");
 
 - Fixed the `video` property in the `suggestions` function.
 
+### [1.0.14] - 2024-08-06
+
+- Added `getComments` function that taked a `IOptions` as a parameter.
+- The old function `getPin` has been officially deprecated though, it is still usable `getPinV3`
+
 ## Projects Using Pinterest.js 🌟
 
 Here are some amazing projects built using Pinterest.js:
@@ -68,4 +75,4 @@ Pinterest.js is licensed under the [MIT License](https://github.com/TrishCX/Pint
 
 ---
 
-_Note: Replace 'Ritesh CX' and [LICENSE](https://github.com/TrishCX/Pinterest.js/blob/main/LICENSE) with your GitHub username and the link to the license file, respectively, when setting up your repository._
+_Note: Replace 'rit3zh' and [LICENSE](https://github.com/TrishCX/Pinterest.js/blob/main/LICENSE) with your GitHub username and the link to the license file, respectively, when setting up your repository._

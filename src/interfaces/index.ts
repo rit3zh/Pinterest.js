@@ -8,3 +8,5 @@ export type * from "./SearchOptions";
 export type * from "./Pin.Results";
 export type * from "./Pin.Response";
 export type * from "./Search.AutoCompletion";
+export type * from "./Pin.ResponseV4";
+export type * from "./Comments.Response";
