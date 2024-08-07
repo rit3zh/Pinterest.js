@@ -49,6 +49,7 @@ export interface PinV4Response {
   images?: PinV4Images;
   id?: string;
   video?: string;
+  aggregatedPinId?: string;
   reactions?: PinV4Reactions;
   commentCount?: number;
   category?: string;

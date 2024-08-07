@@ -38,7 +38,7 @@ export function parsePinV4(data: RootObject): PinV4Response {
       isVerifiedMerchant: response?.board.owner.is_verified_merchant as boolean,
     },
   };
-
+  const aggregatedPinId = response?.aggregated_pin_data?.id;
   const creator = {
     fullName: response?.pinner.full_name as string,
     username: response?.pinner.username as string,
@@ -61,6 +61,7 @@ export function parsePinV4(data: RootObject): PinV4Response {
     title,
     video,
     carousel,
+    aggregatedPinId,
     board,
     category,
     commentCount,
