@@ -47,6 +47,7 @@ export function parsePinV4(data: RootObject): PinV4Response {
   const description = response?.description as string;
   const createdAt = response?.created_at as string;
   const shareCount = response?.share_count as number;
+  const saves = response?.aggregated_pin_data.aggregated_stats?.saves;
   const repinCount = response?.repin_count as number;
   const favorites = response.favorite_user_count as number;
   const carousel = response?.carousel_data?.carousel_slots.map(
@@ -63,6 +64,7 @@ export function parsePinV4(data: RootObject): PinV4Response {
     carousel,
     aggregatedPinId,
     board,
+    saves,
     category,
     commentCount,
     createdAt,

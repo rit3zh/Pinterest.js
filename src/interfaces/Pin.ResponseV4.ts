@@ -50,6 +50,7 @@ export interface PinV4Response {
   id?: string;
   video?: string;
   aggregatedPinId?: string;
+  saves?: number;
   reactions?: PinV4Reactions;
   commentCount?: number;
   category?: string;
