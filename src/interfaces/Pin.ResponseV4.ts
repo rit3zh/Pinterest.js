@@ -166,4 +166,7 @@ export interface PinV4Response {
 
   /** Carousel slots associated with the pin */
   carousel?: PinV4CarouselSlot[];
+
+  /** Link associated with the pin */
+  link?: null | string;
 }

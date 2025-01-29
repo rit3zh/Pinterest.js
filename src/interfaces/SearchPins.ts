@@ -32,6 +32,8 @@ export interface ISearch {
   id?: string;
   /** Title of the Pinterest content (Pin, Board, etc.) */
   title?: string;
+  /** Description of the Pinterest content */
+  description?: string;
   /** Date information for the Pinterest content in `DateOptions` format */
   date?: DateOptions;
   /** Type of the search result (e.g., "Pin", "Board", "Video") */
@@ -42,4 +44,6 @@ export interface ISearch {
   imageURL?: string;
   /** URL to a video related to the Pinterest search result, or undefined if no video */
   video?: string | undefined;
+  /** Link associated with the pin */
+  link?: string;
 }

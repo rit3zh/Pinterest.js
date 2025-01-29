@@ -12,17 +12,19 @@ export default function searchParser(data: any): SearchResults {
     const title: string = !response?.title
       ? response?.grid_title
       : response?.title;
-
     const id = response?.id;
     const date = response?.created_at;
     const type = response?.type;
     const pinner = response?.pinner;
     const initialDate = new Date(date);
     const formattedDate = formatDate(initialDate, "yyyy-MM-dd");
+    const description = response?.description;
+    const link = response?.link;
 
     array.push({
       id,
       title,
+      description,
       pinner: {
         id: pinner?.id,
         username: pinner?.username,
@@ -36,6 +38,7 @@ export default function searchParser(data: any): SearchResults {
       },
       type: type,
       imageURL,
+      link,
     });
   });
   return {

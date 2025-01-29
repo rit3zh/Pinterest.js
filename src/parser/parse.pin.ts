@@ -63,6 +63,7 @@ export function parsePinV4(data: RootObject): PinV4Response {
       id: _carouselData.id as string,
     })
   );
+  const link = response?.link;
   return {
     title,
     video,
@@ -81,6 +82,7 @@ export function parsePinV4(data: RootObject): PinV4Response {
     reactions,
     repinCount,
     shareCount,
+    link,
   };
 }
 
@@ -304,7 +306,7 @@ interface Data {
   pinner: Viapinner;
   ships_to_user_country: boolean;
   aggregated_pin_data: Aggregatedpindata;
-  link: null;
+  link: null | string;
   description: string;
   done_by_me: boolean;
   comment_count: number;
