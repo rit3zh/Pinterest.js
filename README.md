@@ -1,6 +1,41 @@
+<p align="center">
+  <img src="./assets/pinterest-logo.png" alt="App Mockup" width=200>
+    <p align="center">
+
+<p align="center">
+  <a href="https://github.com/rit3zh/pinterest.js" target="_blank">
+    <img src="http://forthebadge.com/images/badges/built-with-love.svg" alt="Built With Love">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/rit3zh/pinterest.js" target="_blank">
+    <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Maintained">
+  </a>
+  <a href="https://github.com/rit3zh/pinterest.js" target="_blank">
+    <img src="https://img.shields.io/badge/License-Boost_1.0-lightblue.svg" alt="Boost License">
+  </a>
+  <a href="https://github.com/rit3zh/pinterest.js" target="_blank">
+    <img src="https://img.shields.io/badge/License-ISC-blue.svg" alt="ISC License">
+  </a>
+  <a href="https://github.com/rit3zh/pinterest.js" target="_blank">
+    <img src="https://badgen.net/github/release/rit3zh/Gladiator" alt="Release">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://www.buymeacoffee.com/rit3zh" target="_blank">
+    <img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me a Coffee">
+  </a>
+</p>
+
+<div align="center">
+
 # Pinterest.js 📌
 
 [Pinterest.js]() is a versatile and efficient JavaScript library that allows you to get information from [Pinterest](https://pinterest.com).
+
+</div>
 
 ## Release Notes 📝
 
@@ -63,6 +98,14 @@ const Pinterest = require("pinterest.js");
 ### [1.0.17] - 2024-12-05
 
 - Added `visualSearch` function that takes `IOptions` as a parameter.
+
+### [1.0.19] - 2022-2-08
+
+- Updated `getBoards` function.
+
+- Added `getBoardSection` function.
+
+- Added `getBoardSectionPins` function.
 
 ## Projects Using Pinterest.js 🌟
 

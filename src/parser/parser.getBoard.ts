@@ -1,9 +1,6 @@
 import type { BoardResults } from "../interfaces/index";
-import { BoardDataResponseRaw } from "../types/raw";
 
-export default function parseBoardData(
-  data: BoardDataResponseRaw
-): BoardResults {
+export default function parseBoardData(data: any): BoardResults {
   const root = data?.resource_response;
 
   const response = root?.data;
@@ -17,7 +14,7 @@ export default function parseBoardData(
   const sectionCount = response?.section_count || 0;
   const collaboratorCount = response?.collaborator_count || 0;
   const collaboratingUsers =
-    response?.collaborating_users.map((user) => {
+    response?.collaborating_users.map((user: any) => {
       return {
         username: user?.username,
         fullName: user?.full_name,
