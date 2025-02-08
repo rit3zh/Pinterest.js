@@ -12,3 +12,7 @@ export type * from "./Pin.ResponseV4";
 export type * from "./Comments.Response";
 export type * from "./Visuals.Results";
 export type * from "./Visuals.Options";
+export type * from "./BoardSection.Options";
+export type * from "./Board.Sections";
+export type * from "./Board.Section.Pins.Options";
+export type * from "./Board.Pins.Result";

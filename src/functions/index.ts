@@ -7,3 +7,5 @@ export * from "./autocomplete";
 export * from "./getPinV3";
 export * from "./getComments";
 export * from "./visualSearch";
+export * from "./getBoardSection";
+export * from "./getBoardSectionPins";

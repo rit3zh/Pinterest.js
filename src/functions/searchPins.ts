@@ -4,7 +4,7 @@ import searchParser from "../parser/parser.search";
 import { ISearch, SearchOptions } from "../interfaces/index";
 import { parseSearchVideos } from "../parser/parse.videosSearch";
 
-export interface ISearchResponse {
+interface ISearchResponse {
   response?: ISearch[];
   bookmark?: string;
 }

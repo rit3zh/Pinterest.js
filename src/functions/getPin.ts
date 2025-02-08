@@ -1,5 +1,5 @@
 import request from "../fetch/request";
-import { PinV4Response } from "../interfaces";
+import type { PinV4Response } from "../interfaces";
 import { parsePinV4 } from "../parser/parse.pin";
 
 /**

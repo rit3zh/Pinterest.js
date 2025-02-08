@@ -25,7 +25,7 @@ export async function getBoard(options: IOptions) {
         board_id: id, // The board ID
         board_url: slashurl, // The board URL
         currentFilter: -1, // Filter to apply to the board
-        field_set_key: "react_grid_pin", // Field set key for the board
+        field_set_key: "profile_grid_item", // Field set key for the board
         filter_section_pins: true, // Whether to filter section pins
         sort: "default", // Sort order for the pins
         layout: "default", // Layout type for the board
@@ -40,7 +40,7 @@ export async function getBoard(options: IOptions) {
   // Construct the full URL for the API request
   const URL: string = `${
     Api.baseURL
-  }/resource/BoardFeedResource/get/?source_url=${encodeURIComponent(
+  }/resource/BoardResource/get/?source_url=${encodeURIComponent(
     params.source_url
   )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
 

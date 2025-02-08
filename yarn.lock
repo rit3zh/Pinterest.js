@@ -480,11 +480,6 @@ typedoc-plugin-markdown@^4.3.1:
   resolved "https://registry.yarnpkg.com/typedoc-plugin-markdown/-/typedoc-plugin-markdown-4.3.1.tgz#62b2290228a4607c4708fd0d13a4ba54b1ef4117"
   integrity sha512-cV0cjvNfr5keytkWUm5AXNFcW3/dd51BYFvbAVqo9AJbHZjt5SGkf2EZ0whSKCilqpwL7biPC/r1WNeW2NbV/w==
 
-typedoc-vitepress-theme@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/typedoc-vitepress-theme/-/typedoc-vitepress-theme-1.1.1.tgz#e5e76589a0d0648f2bdd3916a8c53945509b00fc"
-  integrity sha512-1UbhZdQIkGKLkIZCbw8putrel+Vo7KKFfd8RhQRSBgetUZGUJkum89kIyF3+Kzy+1nqE56/MLKVxpPgQYubYYg==
-
 typedoc@^0.27.3:
   version "0.27.3"
   resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.27.3.tgz#0fad232181ce0ac7eda27fe78e56a4b863e1fe59"
