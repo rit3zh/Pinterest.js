@@ -1,7 +1,8 @@
 import { Api } from "../api/api";
 import request from "../fetch/request";
-import type { BoardResponse } from "../interfaces";
+import type { ISearchBoardsResponse } from "../interfaces";
 import parseBoards from "../parser/parser.boards";
+import searchBoardsParser from "../parser/search.boards.parser";
 
 /**
  * Searches for boards based on the given query and optional bookmark.
@@ -16,7 +17,7 @@ import parseBoards from "../parser/parser.boards";
 export async function searchBoards(
   query: string,
   bookmark?: string
-): Promise<BoardResponse> {
+): Promise<ISearchBoardsResponse> {
   if (!query) throw Error("No query specified");
 
   // Define the request parameters
@@ -54,5 +55,5 @@ export async function searchBoards(
   const data = await request.get(URL);
 
   // Parse the response data and return it
-  return parseBoards(data);
+  return searchBoardsParser(data);
 }

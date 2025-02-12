@@ -1,7 +1,6 @@
-import type { IBoards, SearchResults } from "../interfaces/index";
-import type { BoardResponse } from "../interfaces/index";
+import type { IBoardPinsResponse } from "../interfaces/index";
 
-export default function parseBoards(data: any): BoardResponse {
+export default function parseBoards(data: any): IBoardPinsResponse {
   const root = data.resource_response;
   const bookmark = root?.bookmark;
   const results = root?.data;

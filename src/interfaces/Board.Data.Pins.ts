@@ -2,7 +2,7 @@
  * Represents the owner of a Pinterest board.
  * This is typically the return type when fetching board owner details.
  */
-export interface BoardOwner {
+interface BoardOwner {
   /** Unique identifier for the board owner */
   id?: string;
   /** Username of the board owner on Pinterest */
@@ -19,16 +19,14 @@ export interface BoardOwner {
  * Represents a Pinterest board.
  * This is typically the return type when fetching board details.
  */
-export interface ISearchBoards {
-  name?: string;
-  id?: string;
-  type?: string;
-  thumbnailURL?: string;
-  thumbnailImagesURL?: string[];
-  coverURL?: string;
-  slashURL?: string;
-  pinCount?: number;
+export interface IBoards {
+  title?: string;
   user?: User;
+  id?: string;
+  aggregatedPinId?: string;
+  image?: string;
+  video?: string;
+  description?: string;
 }
 
 interface User {
@@ -40,7 +38,7 @@ interface User {
   type?: string;
 }
 
-export interface ISearchBoardsResponse {
+export interface IBoardPinsResponse {
   bookmark: string;
-  response: ISearchBoards[];
+  response: IBoards[];
 }

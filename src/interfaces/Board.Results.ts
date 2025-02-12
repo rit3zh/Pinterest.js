@@ -1,4 +1,4 @@
-import { IBoards } from "./Search.Boards";
+import { IBoards } from "./Board.Data.Pins";
 
 /**
  * Represents the response data for board search, including optional pagination and board data.

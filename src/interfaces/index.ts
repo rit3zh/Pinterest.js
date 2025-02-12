@@ -16,3 +16,5 @@ export type * from "./BoardSection.Options";
 export type * from "./Board.Sections";
 export type * from "./Board.Section.Pins.Options";
 export type * from "./Board.Pins.Result";
+export type * from "./Search.Boards";
+export type * from "./Board.Data.Pins";

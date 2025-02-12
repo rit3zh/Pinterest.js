@@ -3,7 +3,7 @@ import request from "../fetch/request";
 import type { IBoardSectionPinsOptions } from "../interfaces/index";
 import parseBoards from "../parser/parser.boards";
 
-export async function getBoardPin<T extends IBoardSectionPinsOptions>(
+export async function getBoardPins<T extends IBoardSectionPinsOptions>(
   options: T
 ) {
   const {
