@@ -20,22 +20,20 @@ export interface BoardOwner {
  * This is typically the return type when fetching board details.
  */
 export interface IBoards {
-  /** Unique identifier for the board */
+  title?: string;
+  user?: User;
   id?: string;
-  /** Name of the board */
+  aggregatedPinId?: string;
+  image?: string;
+  video?: string;
+  description?: string;
+}
+
+interface User {
   name?: string;
-  /** Type of the board (e.g., "Personal", "Group") */
+  username?: string;
+  image?: string;
+  id?: string;
+  nodeId?: string;
   type?: string;
-  /** URL to the thumbnail image of the board */
-  thumbnailURL?: string;
-  /** Array of URLs for additional thumbnail images related to the board */
-  thumbnailImagesURL?: string[];
-  /** URL to the cover image of the board */
-  coverURL?: string;
-  /** URL to the board for sharing or navigation */
-  slashURL?: string;
-  /** The number of pins on the board, represented as a string */
-  pinCount?: string;
-  /** The owner of the board, represented by a `BoardOwner` object */
-  owner?: BoardOwner;
 }

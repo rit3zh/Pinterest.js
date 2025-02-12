@@ -9,3 +9,4 @@ export * from "./getComments";
 export * from "./visualSearch";
 export * from "./getBoardSection";
 export * from "./getBoardSectionPins";
+export * from "./getBoardPin";

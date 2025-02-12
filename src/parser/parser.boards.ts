@@ -4,38 +4,37 @@ import type { BoardResponse } from "../interfaces/index";
 export default function parseBoards(data: any): BoardResponse {
   const root = data.resource_response;
   const bookmark = root?.bookmark;
-  const results = root?.data?.results;
-  const array: IBoards[] = [];
-  results.map((response: any, index?: number, _?: any) => {
-    const name: string = response?.name;
-    const id: string = response?.id;
-    const type: string = response?.type;
-    const thumbnailURL: string = response?.image_thumbnail_url;
-    const thumbnailImagesURL: string[] = response?.pin_thumbnail_urls;
-    const coverURL: string = response?.image_cover_hd_url;
-    const slashURL: string = response?.url;
-    const pinCount: string = response?.pin_count;
-    const owner = response?.owner;
-    array.push({
+  const results = root?.data;
+
+  const response = results?.map((response: any, index?: number, _?: any) => {
+    const title = response?.title || response?.grid_title || "";
+    const pinner = response?.pinner;
+    const id = response?.id;
+    const aggregatedPinId = response?.aggregated_pin_data?.id || "";
+    const image = response?.images?.orig?.url || "";
+    const video = response?.videos?.video_list["V_720P"]?.url;
+    const description = response?.description || "";
+    const user = {
+      name: pinner?.full_name,
+      username: pinner?.username,
+      image: pinner?.image_xlarge_url,
+      id: pinner?.id,
+      nodeId: pinner?.node_id,
+      type: pinner?.type,
+    };
+
+    return {
+      title,
       id,
-      name,
-      coverURL,
-      thumbnailURL,
-      thumbnailImagesURL,
-      slashURL,
-      pinCount,
-      type,
-      owner: {
-        id: owner?.id,
-        username: owner?.username,
-        fullName: owner?.full_name,
-        avatarURL: owner?.image_large_url,
-        followers: owner?.follower_count,
-      },
-    });
+      aggregatedPinId,
+      image,
+      video,
+      description,
+      user,
+    };
   });
   return {
     bookmark,
-    response: array,
+    response,
   };
 }
