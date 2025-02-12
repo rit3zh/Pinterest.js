@@ -99,7 +99,7 @@ const Pinterest = require("pinterest.js");
 
 - Added `visualSearch` function that takes `IOptions` as a parameter.
 
-### [1.0.19] - 2022-2-08
+### [1.0.19] - 2025-2-08
 
 - Updated `getBoards` function.
 
@@ -107,7 +107,7 @@ const Pinterest = require("pinterest.js");
 
 - Added `getBoardSectionPins` function.
 
-### [1.0.20] - 2022-2-12
+### [1.0.20] - 2025-2-12
 
 - Added `getBoardPin` function & Fixed previous bugs.
 
