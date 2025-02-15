@@ -8,7 +8,7 @@ export interface IBoardSectionsMap {
   board?: IBoard;
   title?: string;
   slug?: string;
-  pin_count?: number;
+  pintCount?: number;
   user?: IUser;
   id?: string;
   preview_pins?: IPreviewPin[];
