@@ -109,7 +109,7 @@ const Pinterest = require("pinterest.js");
 
 ### [1.0.20] - 2025-2-12
 
-- Added `getBoardPin` function & Fixed previous bugs.
+- Added `getBoardPins` function & Fixed previous bugs.
 
 ## Projects Using Pinterest.js 🌟
 
