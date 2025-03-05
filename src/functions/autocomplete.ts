@@ -34,7 +34,9 @@ export async function getAutoCompletion<T extends string>(query: T) {
   }/resource/AdvancedTypeaheadResource/get/?${queryParams.toString()}`;
 
   // Sends the GET request to fetch the auto-completion data
-  const data = await request.get(url);
+  const data = await request.get(url, {
+    "x-pinterest-pws-handler": "www/[username]/[slug].js",
+  });
 
   // Parses and returns the data after fetching it
   return parseAutoCompletion(data);

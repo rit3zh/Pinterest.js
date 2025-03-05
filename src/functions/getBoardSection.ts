@@ -29,6 +29,8 @@ export async function getBoardSection<T extends IBoardSectionOptions>(
     params.source_url
   )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
   // Make the API request
-  const response = await request.get(URL);
+  const response = await request.get(URL, {
+    "x-pinterest-pws-handler": "www/[username]/[slug].js",
+  });
   return parseBoardSection(response);
 }

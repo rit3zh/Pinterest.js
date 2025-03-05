@@ -36,7 +36,9 @@ export async function visualSearch<T extends IVisualOptions>(
   )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
 
   // Make the request to fetch the initial data
-  const data = await request.get(URL);
+  const data = await request.get(URL, {
+    "x-pinterest-pws-handler": "www/pin/[id].js",
+  });
 
   // Extract the visual object from the data
   const visualObject = getVisualObject(data);
@@ -72,7 +74,9 @@ export async function visualSearch<T extends IVisualOptions>(
   )}&data=${encodeURIComponent(JSON.stringify(visual_params.data))}`;
 
   // Make the request for visual search data
-  const visualData = await request.get(VISUAL_URL);
+  const visualData = await request.get(VISUAL_URL, {
+    "x-pinterest-pws-handler": "www/pin/[id]/visual-search.js",
+  });
 
   // Extract the visual search data
   const visualResource = visualData?.resource_response;

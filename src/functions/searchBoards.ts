@@ -52,7 +52,9 @@ export async function searchBoards(
   )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
 
   // Make the API request
-  const data = await request.get(URL);
+  const data = await request.get(URL, {
+    "x-pinterest-pws-handler": "www/ideas/[interest]/[id].js",
+  });
 
   // Parse the response data and return it
   return searchBoardsParser(data);

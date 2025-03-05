@@ -42,7 +42,9 @@ export async function getComments(
   )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
 
   // Send the GET request and fetch the data
-  const data = await request.get(URL);
+  const data = await request.get(URL, {
+    "x-pinterest-pws-handler": "www/pin/[id].js",
+  });
 
   // Parse and return the comments data
   return parseCommentsResponse(data);

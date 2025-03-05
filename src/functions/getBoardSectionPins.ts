@@ -42,7 +42,9 @@ export async function getBoardSectionPins<T extends IBoardSectionPinsOptions>(
     params.source_url
   )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
   // Send the GET request to fetch the board data
-  const data = await request.get(URL);
+  const data = await request.get(URL, {
+    "x-pinterest-pws-handler": "www/[username]/[slug]/[section_slug].js",
+  });
 
   return parseBoardSectionPinsParser(data);
 }

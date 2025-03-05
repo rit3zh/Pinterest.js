@@ -39,6 +39,8 @@ export async function suggestions<T extends string>(id: T, bookmark?: string) {
     params.source_url
   )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
 
-  const data = await request.get(URL);
+  const data = await request.get(URL, {
+    "x-pinterest-pws-handler": "www/pin/[id].js",
+  });
   return parseSuggestions(data); // Parse and return the suggestions
 }

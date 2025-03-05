@@ -54,7 +54,9 @@ export async function searchPins(
       params.source_url
     )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
 
-    const data = await request.get(URL);
+    const data = await request.get(URL, {
+      "x-pinterest-pws-handler": "www/ideas/[interest]/[id].js",
+    });
     return parseSearchVideos(data); // Parse and return the video-specific search results
   } else {
     // For regular pin search
@@ -84,7 +86,9 @@ export async function searchPins(
       params.source_url
     )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
 
-    const data = await request.get(URL);
+    const data = await request.get(URL, {
+      "x-pinterest-pws-handler": "www/ideas/[interest]/[id].js",
+    });
     return searchParser(data); // Parse and return the regular search results
   }
 }

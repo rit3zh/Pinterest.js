@@ -30,7 +30,9 @@ export async function getPin<T extends string>(id: T): Promise<PinV4Response> {
   )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
 
   // Send the GET request and fetch the pin data
-  const data = await request.get(URL);
+  const data = await request.get(URL, {
+    "x-pinterest-pws-handler": "www/pin/[id].js",
+  });
 
   // Parse and return the pin data
   return parsePinV4(data);
