@@ -3,7 +3,7 @@ export function parseCommentsResponse(
   data: any
 ): CommentsResultResponse[] {
   const { resource_response } = data;
-  const response = resource_response?.data?.map((result) => ({
+  const response = resource_response?.data?.map((result: any) => ({
     text: result.text,
     createdAt: result.created_at,
     user: {
