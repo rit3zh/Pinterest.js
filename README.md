@@ -70,47 +70,6 @@ To utilize Pinterest.js in your project, import the library into your JavaScript
 const Pinterest = require("pinterest.js");
 ```
 
-## Change Log 📜
-
-### [1.0.5] - 2024-07-06
-
-- Added support for video search functionality.
-- Added `limit` option in the `searchPins` function.
-- Resolved all existing errors.
-
-### [1.0.8] - 2024-07-10
-
-- Initial release of Pinterest.js with basic functionality to search and retrieve pins.
-
-### [1.0.11] - 2024-07-25
-
-- Added `getAutoCompletion` function that takes a query parameter.
-
-### [1.0.13] - 2024-08-06
-
-- Fixed the `video` property in the `getPin` function.
-
-### [1.0.16] - 2024-08-06
-
-- Added `getComments` function that takes `IOptions` as a parameter.
-- The old function `getPin` has been officially deprecated, though it is still usable as `getPinV3`.
-
-### [1.0.17] - 2024-12-05
-
-- Added `visualSearch` function that takes `IOptions` as a parameter.
-
-### [1.0.19] - 2025-2-08
-
-- Updated `getBoards` function.
-
-- Added `getBoardSection` function.
-
-- Added `getBoardSectionPins` function.
-
-### [1.0.20] - 2025-2-12
-
-- Added `getBoardPins` function & Fixed previous bugs.
-
 ## Projects Using Pinterest.js 🌟
 
 Here are some amazing projects built using Pinterest.js:
