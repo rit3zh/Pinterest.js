@@ -15,4 +15,6 @@ export interface SearchOptions {
   filter?: PinsType;
   /** Optional limit to specify the maximum number of results to return */
   limit?: number;
+
+  search: string;
 }

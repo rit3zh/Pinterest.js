@@ -15,7 +15,7 @@ export function parseCommentsResponse(
     details: result.details,
     likes: result.like_count,
     tags: result.tags,
-    image: result?.images?.map((i) => i?.originals?.url) as string[],
+    image: result?.images?.map((i: any) => i?.originals?.url) as string[],
   }));
   return response;
 }

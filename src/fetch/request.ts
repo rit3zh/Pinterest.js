@@ -1,4 +1,4 @@
-class FetchRequest {
+export class FetchRequest {
   public async get(url: string, headers?: HeadersInit) {
     const request = await fetch(url, { headers });
     const response = await request.json();

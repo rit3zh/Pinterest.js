@@ -1,5 +1,6 @@
 src
 node_modules
 tsconfig.json
+bun.lock
 docs
 markdown
