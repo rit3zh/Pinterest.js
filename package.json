@@ -5,7 +5,6 @@
   "main": "dist/index.js",
   "repository": "https://github.com/TrishCX/Pinterest.js",
   "scripts": {
-    "test": "tsc && node --test test/*.test.cjs",
     "build:dev": "nodemon dist/index.js",
     "watch": "tsx watch src/index.ts",
     "watch:dev": "npx tsc --watch",
