@@ -19,9 +19,10 @@ export function parsePinV4(data: any): PinV4Response {
     response?.story_pin_data?.pages[0]?.blocks[0]?.video?.video_list
       ?.V_HLSV3_MOBILE?.url;
 
+  const reactionCount = response?.reaction_counts?.[1] ?? 0;
   const reactions = {
-    label: formatNumberWithLabel(response?.reaction_counts?.[1]) as string,
-    numbers: response?.reaction_counts?.[1] as number,
+    label: formatNumberWithLabel(reactionCount) as string,
+    numbers: reactionCount as number,
   };
   const commentCount = response.comment_count as number;
   const category = response?.category as string;
