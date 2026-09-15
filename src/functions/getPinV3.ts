@@ -1,34 +1,27 @@
-import { Api } from "../api/api";
+import { PINTEREST_BASE_URL } from "../core";
 import request from "../fetch/request";
-import { parseSpecificScriptTags } from "../parser/parser.tags";
-import { parsePinData } from "../parser/parse.pin_v3";
 import type { ParsedPinData } from "../interfaces";
+import { parsePinData } from "../parser/pinV3";
+import { parseSpecificScriptTags } from "../parser/scriptTags";
+import { assertNonEmpty } from "../utils/assert";
 
 /**
- * Fetches pin data using version 3 of the API.
+ * Fetches pin data by scraping the pin page's embedded Relay payload.
  *
- * This function is deprecated and may be removed in future versions.
+ * @deprecated Use {@link getPin} instead; this scrapes HTML and is brittle.
  *
- * @deprecated
- *
- * @param id - The unique identifier of the pin to fetch.
- * @returns A promise that resolves to the parsed pin data (`ParsedPinData`).
+ * @param id - The unique identifier of the pin.
+ * @returns The parsed pin data.
  */
 export async function getPinV3(id: string): Promise<ParsedPinData> {
-  // Fetch the raw HTML content of the pin page
-  const requestCall = await request.getText(Api.baseURL + `/pin/${id}`);
+  assertNonEmpty(id, "id");
 
-  // Parse the HTML content to extract all script tags
-  const response = requestCall;
-  const parseScriptAllScriptTags = parseSpecificScriptTags(response);
+  const html = await request.getText(`${PINTEREST_BASE_URL}/pin/${id}`);
+  const [payload] = parseSpecificScriptTags(html);
 
-  // Extract and parse the relevant JSON data from the first script tag
-  const scriptFormValidation = parseScriptAllScriptTags[0];
-  const JSONConversion = JSON.parse(scriptFormValidation);
+  if (!payload) {
+    throw new Error(`[pinterest.js] No pin payload found for id "${id}"`);
+  }
 
-  // Parse the pin data from the JSON object
-  const data = parsePinData(JSONConversion);
-
-  // Return the parsed pin data
-  return { ...data };
+  return parsePinData(JSON.parse(payload));
 }

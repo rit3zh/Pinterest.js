@@ -1,10 +1,11 @@
 import type { IBoardSections } from "../interfaces";
 
-export function parseBoardSection<T>(body?: any): IBoardSections {
-  const data = body?.resource_response!;
+/** Parses a `BoardSectionsResource` response into a board's sections. */
+export function parseBoardSections(body: any): IBoardSections {
+  const data = body?.resource_response;
   const bookmark = data?.bookmark;
   const sections = data?.data || [];
-  const mappedSections = sections.map((value: any, index: any) => ({
+  const mappedSections = sections.map((value: any) => ({
     title: value?.title || "",
     slug: value?.slug || "",
     pinCount: value?.pin_count || 0,
@@ -19,10 +20,10 @@ export function parseBoardSection<T>(body?: any): IBoardSections {
       nodeId: value?.board?.node_id || "",
     },
 
-    previewPins: value?.preview_pins.map((pin: any) => ({
+    previewPins: (value?.preview_pins ?? []).map((pin: any) => ({
       title: pin?.title || "",
       isDownstreamPromotion: pin?.is_downstream_promotion || false,
-      id: pin.id || "",
+      id: pin?.id || "",
       isUploaded: pin?.is_uploaded || false,
       link: pin?.link || "",
       trackingParams: pin?.tracking_params || "",

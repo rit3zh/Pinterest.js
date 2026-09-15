@@ -1,61 +1,42 @@
-import { Api } from "../api/api";
-import request from "../fetch/request";
+import { fetchResource, PwsHandler, toBookmarks } from "../core";
 import type { ISearchBoardsResponse } from "../interfaces";
-import parseBoards from "../parser/parser.boards";
-import searchBoardsParser from "../parser/search.boards.parser";
+import { assertNonEmpty } from "../utils/assert";
+import { parseSearchBoards } from "../parser/searchBoards";
 
 /**
- * Searches for boards based on the given query and optional bookmark.
+ * Searches Pinterest for boards.
  *
- * This function fetches a list of boards matching the search query.
- *
- * @param query - The search term to find boards.
- * @param bookmark - An optional bookmark for pagination or filtering.
- * @returns A promise that resolves to the parsed board data (`BoardResponse`).
- * @throws Error if no query is specified.
+ * @param query - The search term.
+ * @param bookmark - Optional pagination bookmark from a previous call.
+ * @returns The matching boards and a bookmark for the next page.
  */
 export async function searchBoards(
   query: string,
-  bookmark?: string
+  bookmark?: string,
 ): Promise<ISearchBoardsResponse> {
-  if (!query) throw Error("No query specified");
+  assertNonEmpty(query, "query");
 
-  // Define the request parameters
-  const params = {
-    source_url: `/search/boards/?q=${query}&rs=content_type_filter`,
-    data: {
-      options: {
-        article: null,
-        applied_filters: null,
-        appliedProductFilters: "---",
-        auto_correction_disabled: false,
-        corpus: null,
-        customized_rerank_type: null,
-        filters: null,
-        query: query,
-        query_pin_sigs: null,
-        redux_normalize_feed: true,
-        rs: "content_type_filter",
-        scope: "boards",
-        source_id: null,
-        bookmarks: [bookmark],
-      },
-      context: {},
+  const data = await fetchResource({
+    resource: "BaseSearchResource",
+    sourceUrl: `/search/boards/?q=${encodeURIComponent(query)}&rs=content_type_filter`,
+    handler: PwsHandler.IDEAS,
+    options: {
+      article: null,
+      applied_filters: null,
+      appliedProductFilters: "---",
+      auto_correction_disabled: false,
+      corpus: null,
+      customized_rerank_type: null,
+      filters: null,
+      query,
+      query_pin_sigs: null,
+      redux_normalize_feed: true,
+      rs: "content_type_filter",
+      scope: "boards",
+      source_id: null,
+      bookmarks: toBookmarks(bookmark),
     },
-  };
-
-  // Construct the URL for the API request
-  const URL: string = `${
-    Api.baseURL
-  }/resource/BaseSearchResource/get/?source_url=${encodeURIComponent(
-    params.source_url
-  )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
-
-  // Make the API request
-  const data = await request.get(URL, {
-    "x-pinterest-pws-handler": "www/ideas/[interest]/[id].js",
   });
 
-  // Parse the response data and return it
-  return searchBoardsParser(data);
+  return parseSearchBoards(data);
 }

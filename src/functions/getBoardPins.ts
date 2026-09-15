@@ -5,21 +5,21 @@ import {
   toBookmarks,
 } from "../core";
 import type {
-  IBoardSectionPins,
+  IBoardPinsResponse,
   IBoardSectionPinsOptions,
 } from "../interfaces";
-import { parseBoardSectionPins } from "../parser/boardSectionPins";
+import { parseBoardPins } from "../parser/boardPins";
 import { assertNonEmpty } from "../utils/assert";
 
 /**
- * Fetches the pins inside a single board section.
+ * Fetches the pins in a board's main feed.
  *
- * @param options - The section's `id` and the board `slug`, plus paging settings.
- * @returns The section's pins and a bookmark for the next page.
+ * @param options - The board's `id` and `slug`, plus optional paging settings.
+ * @returns The board's pins and a bookmark for the next page.
  */
-export async function getBoardSectionPins(
+export async function getBoardPins(
   options: IBoardSectionPinsOptions,
-): Promise<IBoardSectionPins> {
+): Promise<IBoardPinsResponse> {
   const {
     slug,
     id,
@@ -31,20 +31,22 @@ export async function getBoardSectionPins(
   assertNonEmpty(slug, "slug");
 
   const data = await fetchResource({
-    resource: "BoardSectionPinsResource",
+    resource: "BoardFeedResource",
     sourceUrl: slug,
-    handler: PwsHandler.BOARD_SECTION,
+    handler: PwsHandler.BOARD,
     options: {
+      board_id: id,
+      board_url: slug,
       bookmarks: toBookmarks(bookmark),
-      currentFilter: -1,
-      field_set_key: "react_grid_pin",
-      is_own_profile_pins: false,
       page_size: pageSize,
       redux_normalize_feed: normalizeFeed,
-      section_id: id,
-      orbac_subject_id: "",
+      currentFilter: -1,
+      field_set_key: "react_grid_pin",
+      filter_section_pins: true,
+      sort: "default",
+      layout: "default",
     },
   });
 
-  return parseBoardSectionPins(data);
+  return parseBoardPins(data);
 }

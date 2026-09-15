@@ -2,19 +2,6 @@ import type {
   AutoCompletionResponse,
   BoardResults,
   CommentsResultResponse,
-  IBoardPinsResponse,
-  IBoardSectionOptions,
-  IBoardSectionPins,
-  IBoardSectionPinsOptions,
-  IBoardSections,
-  IOptions,
-  ISearchBoardsResponse,
-  IVisualOptions,
-  IVisualResult,
-  PinV4Response,
-  SearchOptions,
-} from "../../interfaces";
-import type {
   GetAutoCompletionOptions,
   GetBoardOptions,
   GetBoardPinsOptions,
@@ -23,17 +10,23 @@ import type {
   GetCommentsOptions,
   GetPinOptions,
   GetSuggestionsOptions,
+  IBoardPinsResponse,
+  IBoardSectionPins,
+  IBoardSections,
+  ISearchBoardsResponse,
+  IVisualResult,
   PinsSearchResult,
+  PinV4Response,
   SearchBoardsOptions,
   SearchPinsOptions,
   SuggestionsResult,
   VisualSearchOptions,
-} from "../../interfaces/Client";
-import { getAutoCompletion } from "../../functions/autocomplete";
-import { getBoardPins } from "../../functions/getBoardPin";
+} from "../../interfaces";
+import { getAutoCompletion } from "../../functions/getAutoCompletion";
+import { getBoard } from "../../functions/getBoard";
+import { getBoardPins } from "../../functions/getBoardPins";
 import { getBoardSection } from "../../functions/getBoardSection";
 import { getBoardSectionPins } from "../../functions/getBoardSectionPins";
-import { getBoard } from "../../functions/getBoards";
 import { getComments } from "../../functions/getComments";
 import { getPin } from "../../functions/getPin";
 import { searchBoards } from "../../functions/searchBoards";
@@ -41,73 +34,61 @@ import { searchPins } from "../../functions/searchPins";
 import { suggestions } from "../../functions/suggestions";
 import { visualSearch } from "../../functions/visualSearch";
 
-function assertNonEmpty(value: string, label: string): void {
-  if (!value || value.trim() === "") {
-    throw new TypeError(
-      `[PinterestClient] ${label} must be a non-empty string`,
-    );
-  }
-}
-
+/**
+ * The library's main entry point: every Pinterest endpoint behind a single
+ * object, each taking one options bag with consistently camelCased keys.
+ *
+ * @example
+ * ```ts
+ * const client = new PinterestClient();
+ * const pin = await client.getPin({ id: "710302172523483897" });
+ * ```
+ */
 export class PinterestClient {
-  async getPin<T extends GetPinOptions>(options: T): Promise<PinV4Response> {
-    assertNonEmpty(options.id, "id");
+  /** Fetches a single pin by ID. */
+  async getPin(options: GetPinOptions): Promise<PinV4Response> {
     return getPin(options.id);
   }
 
-  async searchPins<T extends SearchPinsOptions>(
-    options: T,
-  ): Promise<PinsSearchResult> {
-    assertNonEmpty(options.query, "query");
-    const opts: SearchOptions = {
-      search: options.query,
+  /** Searches for pins, optionally narrowed to videos. */
+  async searchPins(options: SearchPinsOptions): Promise<PinsSearchResult> {
+    return searchPins(options.query, {
       bookmark: options.bookmark,
       filter: options.filter,
       limit: options.limit,
-    };
-    return searchPins(options.query, opts);
+    });
   }
 
-  async searchBoards<T extends SearchBoardsOptions>(
-    options: T,
+  /** Searches for boards. */
+  async searchBoards(
+    options: SearchBoardsOptions,
   ): Promise<ISearchBoardsResponse> {
-    assertNonEmpty(options.query, "query");
     return searchBoards(options.query, options.bookmark);
   }
 
-  async getAutoCompletion<T extends GetAutoCompletionOptions>(
-    options: T,
+  /** Fetches typeahead suggestions for a partial search term. */
+  async getAutoCompletion(
+    options: GetAutoCompletionOptions,
   ): Promise<AutoCompletionResponse[]> {
-    assertNonEmpty(options.query, "query");
     return getAutoCompletion(options.query);
   }
 
-  async getSuggestions<T extends GetSuggestionsOptions>(
-    options: T,
+  /** Fetches pins related to a given pin. */
+  async getSuggestions(
+    options: GetSuggestionsOptions,
   ): Promise<SuggestionsResult> {
-    assertNonEmpty(options.pinId, "pinId");
-    return suggestions(
-      options.pinId,
-      options.bookmark,
-    ) as Promise<SuggestionsResult>;
+    return suggestions(options.pinId, options.bookmark);
   }
 
-  async visualSearch<T extends VisualSearchOptions>(
-    options: T,
-  ): Promise<IVisualResult> {
-    assertNonEmpty(options.pinId, "pinId");
-    const opts: IVisualOptions = {
-      id: options.pinId,
-      bookmark: options.bookmark,
-    };
-    return visualSearch(opts);
+  /** Finds pins that look visually similar to a given pin. */
+  async visualSearch(options: VisualSearchOptions): Promise<IVisualResult> {
+    return visualSearch({ id: options.pinId, bookmark: options.bookmark });
   }
 
-  async getComments<T extends GetCommentsOptions>(
-    options: T,
+  /** Fetches the comments on a pin. */
+  async getComments(
+    options: GetCommentsOptions,
   ): Promise<CommentsResultResponse[]> {
-    assertNonEmpty(options.pinId, "pinId");
-    assertNonEmpty(options.aggregatedPinId, "aggregatedPinId");
     return getComments({
       id: options.pinId,
       aggregatedPinId: options.aggregatedPinId,
@@ -115,57 +96,49 @@ export class PinterestClient {
     });
   }
 
-  async getBoard<T extends GetBoardOptions>(options: T): Promise<BoardResults> {
-    assertNonEmpty(options.id, "id");
-    assertNonEmpty(options.slashUrl, "slashUrl");
-    const opts: IOptions = {
+  /** Fetches a board's metadata. */
+  async getBoard(options: GetBoardOptions): Promise<BoardResults> {
+    return getBoard({
       id: options.id,
       slashurl: options.slashUrl,
       bookmark: options.bookmark,
-    };
-    return getBoard(opts);
+    });
   }
 
-  async getBoardPins<T extends GetBoardPinsOptions>(
-    options: T,
+  /** Fetches the pins in a board's main feed. */
+  async getBoardPins(
+    options: GetBoardPinsOptions,
   ): Promise<IBoardPinsResponse> {
-    assertNonEmpty(options.id, "id");
-    assertNonEmpty(options.slug, "slug");
-    const opts: IBoardSectionPinsOptions = {
+    return getBoardPins({
       id: options.id,
       slug: options.slug,
       bookmark: options.bookmark,
       pageSize: options.pageSize,
       normalizeFeed: options.normalizeFeed,
-    };
-    return getBoardPins(opts);
+    });
   }
 
-  async getBoardSections<T extends GetBoardSectionsOptions>(
-    options: T,
+  /** Fetches a board's sections. */
+  async getBoardSections(
+    options: GetBoardSectionsOptions,
   ): Promise<IBoardSections> {
-    assertNonEmpty(options.id, "id");
-    assertNonEmpty(options.slashUrl, "slashUrl");
-    const opts: IBoardSectionOptions = {
+    return getBoardSection({
       id: options.id,
       slashurl: options.slashUrl,
       bookmark: options.bookmark,
-    };
-    return getBoardSection(opts);
+    });
   }
 
-  async getBoardSectionPins<T extends GetBoardSectionPinsOptions>(
-    options: T,
+  /** Fetches the pins inside a single board section. */
+  async getBoardSectionPins(
+    options: GetBoardSectionPinsOptions,
   ): Promise<IBoardSectionPins> {
-    assertNonEmpty(options.id, "id");
-    assertNonEmpty(options.slug, "slug");
-    const opts: IBoardSectionPinsOptions = {
+    return getBoardSectionPins({
       id: options.id,
       slug: options.slug,
       bookmark: options.bookmark,
       pageSize: options.pageSize,
       normalizeFeed: options.normalizeFeed,
-    };
-    return getBoardSectionPins(opts);
+    });
   }
 }

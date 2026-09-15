@@ -1,51 +1,46 @@
-import request from "../fetch/request";
-import { CommentsResultResponse } from "../interfaces";
-import { parseCommentsResponse } from "../parser/parse.comments";
+import { fetchResource, PINTEREST_IN_BASE_URL, PwsHandler } from "../core";
+import type { CommentsResultResponse } from "../interfaces";
+import { parseCommentsResponse } from "../parser/comments";
+import { assertNonEmpty } from "../utils/assert";
 
-interface IOptions {
-  id: string; // Pin ID
-  aggregatedPinId: string; // Aggregated Pin ID
-  pageSize?: number; // Number of comments per page (optional)
+/** Default number of comments returned when the caller doesn't specify one. */
+const DEFAULT_COMMENT_PAGE_SIZE = 20;
+
+export interface GetCommentsParams {
+  /** The pin's unique identifier. */
+  id: string;
+  /** The pin's aggregated ID, which is what comments are keyed by. */
+  aggregatedPinId: string;
+  /** Number of comments to fetch. Defaults to 20. */
+  pageSize?: number;
 }
 
 /**
- * Fetches comments for a specific pin based on the provided options.
+ * Fetches the comments on a pin.
  *
- * @param options - The options object containing:
- *   - id: The unique identifier for the pin.
- *   - aggregatedPinId: The aggregated pin ID for the comments.
- *   - pageSize: The number of comments to fetch per page (defaults to 20).
- *
- * @returns A promise that resolves to an array of comment data (`CommentsResultResponse[]`).
+ * @param options - The pin's IDs and an optional page size.
+ * @returns The comments, newest first.
  */
 export async function getComments(
-  options: IOptions
+  options: GetCommentsParams,
 ): Promise<CommentsResultResponse[]> {
-  // Define the parameters for the API request
-  const params = {
-    source_url: `/pin/${options.id}/`, // Pin URL
-    data: {
-      options: {
-        aggregated_pin_id: options.aggregatedPinId, // Aggregated Pin ID
-        comment_featured_ids: [], // Featured comment IDs (empty array by default)
-        page_size: options?.pageSize || 20, // Number of comments to fetch
-        redux_normalize_feed: true, // Normalizes the feed data
-        is_reversed: false, // Order of comments (false for newest first)
-      },
-      context: {}, // Additional context for the request
+  const { id, aggregatedPinId, pageSize = DEFAULT_COMMENT_PAGE_SIZE } = options;
+  assertNonEmpty(id, "id");
+  assertNonEmpty(aggregatedPinId, "aggregatedPinId");
+
+  const data = await fetchResource({
+    resource: "UnifiedCommentsResource",
+    sourceUrl: `/pin/${id}/`,
+    handler: PwsHandler.PIN,
+    baseUrl: PINTEREST_IN_BASE_URL,
+    options: {
+      aggregated_pin_id: aggregatedPinId,
+      comment_featured_ids: [],
+      page_size: pageSize,
+      redux_normalize_feed: true,
+      is_reversed: false,
     },
-  };
-
-  // Construct the URL for the API request
-  const URL: string = `https://in.pinterest.com/resource/UnifiedCommentsResource/get/?source_url=${encodeURIComponent(
-    params.source_url
-  )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
-
-  // Send the GET request and fetch the data
-  const data = await request.get(URL, {
-    "x-pinterest-pws-handler": "www/pin/[id].js",
   });
 
-  // Parse and return the comments data
   return parseCommentsResponse(data);
 }

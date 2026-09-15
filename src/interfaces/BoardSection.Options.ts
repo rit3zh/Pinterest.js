@@ -1,5 +1,4 @@
-export interface IBoardSectionOptions {
-  id: string;
-  slashurl: string;
-  bookmark?: string;
-}
+import type { IOptions } from "./Board.Options";
+
+/** Identifies a board's sections. Same shape as {@link IOptions}. */
+export type IBoardSectionOptions = IOptions;

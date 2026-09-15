@@ -1,7 +1,7 @@
-import { Data, ImageResponse, ParsedPinData } from "../interfaces";
+import type { Data, ImageResponse, ParsedPinData } from "../interfaces";
 
-export function parsePinData(data: Data) {
-  console.log(data.response.data.v3GetPinQuery.data);
+/** Parses the Relay payload embedded in a pin page. */
+export function parsePinData(data: Data): ParsedPinData {
   const { response } = data;
   const _data = response?.data;
   const v3GetPinQuery = _data?.v3GetPinQuery?.data;

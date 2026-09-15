@@ -1,6 +1,7 @@
-import type { BoardResults } from "../interfaces/index";
+import type { BoardResults } from "../interfaces";
 
-export default function parseBoardData(data: any): BoardResults {
+/** Parses a `BoardResource` response into a board's metadata. */
+export function parseBoardData(data: any): BoardResults {
   const root = data?.resource_response;
 
   const response = root?.data;
@@ -14,7 +15,7 @@ export default function parseBoardData(data: any): BoardResults {
   const sectionCount = response?.section_count || 0;
   const collaboratorCount = response?.collaborator_count || 0;
   const collaboratingUsers =
-    response?.collaborating_users.map((user: any) => {
+    response?.collaborating_users?.map((user: any) => {
       return {
         username: user?.username,
         fullName: user?.full_name,
@@ -23,7 +24,7 @@ export default function parseBoardData(data: any): BoardResults {
         verified: user?.is_verified_merchant,
       };
     }) || [];
-  const coverImage = response?.cover_images["222x"].url || "";
+  const coverImage = response?.cover_images?.["222x"]?.url || "";
   const coverPin = {
     url: response?.cover_pin?.image_url,
     id: response?.cover_pin?.pin_id,

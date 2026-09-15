@@ -1,36 +1,30 @@
-import { Api } from "../api/api";
-import request from "../fetch/request";
-import { IBoardSectionOptions } from "../interfaces";
-import { parseBoardSection } from "../parser/parse.boardSection";
+import { fetchResource, PwsHandler, toBookmarks } from "../core";
+import type { IBoardSectionOptions, IBoardSections } from "../interfaces";
+import { parseBoardSections } from "../parser/boardSections";
+import { assertNonEmpty } from "../utils/assert";
 
-export async function getBoardSection<T extends IBoardSectionOptions>(
-  options: T
-) {
+/**
+ * Fetches the sections of a board.
+ *
+ * @param options - The board's `id` and `slashurl`, plus an optional bookmark.
+ * @returns The board's sections, each with its preview pins.
+ */
+export async function getBoardSection(
+  options: IBoardSectionOptions,
+): Promise<IBoardSections> {
   const { id, slashurl, bookmark } = options;
+  assertNonEmpty(id, "id");
+  assertNonEmpty(slashurl, "slashurl");
 
-  // Ensure that both 'id' and 'slashurl' are provided
-  if (!id) throw Error("No id specified.");
-  if (!slashurl) throw Error("No slash url specified.");
-  // Define the parameters for the API request
-  const params = {
-    source_url: `${slashurl}`, // The URL of the board
-    data: {
-      options: {
-        board_id: id, // The board ID
-        bookmarks: [bookmark], // Bookmarks to filter by
-      },
-      context: {}, // Additional context data for the request
+  const data = await fetchResource({
+    resource: "BoardSectionsResource",
+    sourceUrl: slashurl,
+    handler: PwsHandler.BOARD,
+    options: {
+      board_id: id,
+      bookmarks: toBookmarks(bookmark),
     },
-  };
-  // Construct the full URL for the API request
-  const URL: string = `${
-    Api.baseURL
-  }/resource/BoardSectionsResource/get/?source_url=${encodeURIComponent(
-    params.source_url
-  )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
-  // Make the API request
-  const response = await request.get(URL, {
-    "x-pinterest-pws-handler": "www/[username]/[slug].js",
   });
-  return parseBoardSection(response);
+
+  return parseBoardSections(data);
 }

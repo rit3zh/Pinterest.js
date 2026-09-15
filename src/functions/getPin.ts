@@ -1,39 +1,29 @@
-import request from "../fetch/request";
+import { fetchResource, PINTEREST_IN_BASE_URL, PwsHandler } from "../core";
 import type { PinV4Response } from "../interfaces";
-import { parsePinV4 } from "../parser/parse.pin";
+import { parsePinV4 } from "../parser/pin";
+import { assertNonEmpty } from "../utils/assert";
 
 /**
- * Fetches a pin by its ID from Pinterest.
+ * Fetches a single pin by its ID.
  *
- * @param id - The unique identifier of the pin to fetch.
- *
- * @returns A promise that resolves to the pin data (`PinV4Response`).
+ * @param id - The unique identifier of the pin.
+ * @returns The pin's details, including images, board, creator and stats.
  */
-export async function getPin<T extends string>(id: T): Promise<PinV4Response> {
-  // Define the parameters for the API request
-  const params = {
-    source_url: `/pin/${id}/`, // URL for the specific pin
-    data: {
-      options: {
-        id: `${id}`, // Pin ID
-        field_set_key: "auth_web_main_pin", // The set of fields to fetch
-        noCache: true, // Avoid caching the response
-        fetch_visual_search_objects: true, // Include visual search objects in the response
-      },
-      context: {}, // Additional context for the request
+export async function getPin(id: string): Promise<PinV4Response> {
+  assertNonEmpty(id, "id");
+
+  const data = await fetchResource({
+    resource: "PinResource",
+    sourceUrl: `/pin/${id}/`,
+    handler: PwsHandler.PIN,
+    baseUrl: PINTEREST_IN_BASE_URL,
+    options: {
+      id,
+      field_set_key: "auth_web_main_pin",
+      noCache: true,
+      fetch_visual_search_objects: true,
     },
-  };
-
-  // Construct the URL for the API request
-  const URL: string = `https://in.pinterest.com/resource/PinResource/get/?source_url=${encodeURIComponent(
-    params.source_url
-  )}&data=${encodeURIComponent(JSON.stringify(params.data))}`;
-
-  // Send the GET request and fetch the pin data
-  const data = await request.get(URL, {
-    "x-pinterest-pws-handler": "www/pin/[id].js",
   });
 
-  // Parse and return the pin data
   return parsePinV4(data);
 }
